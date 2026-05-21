@@ -9,12 +9,12 @@ class lonelyvoidView extends WatchUi.WatchFace {
     private var _bodyBatteryStr as String = "[BB: ---]";
 
     function initialize() {
-        WatchFace.initialize();
-
         Complications.registerComplicationChangeCallback(method(:onComplicationChanged));
         
         _bodyBatteryId = new Complications.Id(Complications.COMPLICATION_TYPE_BODY_BATTERY);
         Complications.subscribeToUpdates(_bodyBatteryId);
+
+        WatchFace.initialize();
     }
 
     function onLayout(dc as Dc) as Void {
@@ -28,10 +28,10 @@ class lonelyvoidView extends WatchUi.WatchFace {
         if (_bodyBatteryId != null && id.equals(_bodyBatteryId)) {
             var complication = Complications.getComplication(id);
             if (complication != null && complication.value != null) {
-                _bodyBatteryStr = Lang.format("[BB: $1$]", [complication.value]);
+                _bodyBatteryStr = Lang.format("[ BB: $1$ ]", [complication.value]);
             }
         }
-        
+
         WatchUi.requestUpdate();
     }
 
@@ -81,7 +81,6 @@ class lonelyvoidView extends WatchUi.WatchFace {
         (View.findDrawableById("BATTERY") as WatchUi.Text).setText(batteryString);
         (View.findDrawableById("DISTANCE") as WatchUi.Text).setText(distString);
         (View.findDrawableById("BODY_BATTERY") as WatchUi.Text or Null).setText(_bodyBatteryStr);
-        
         View.onUpdate(dc);
     }
 
@@ -93,5 +92,4 @@ class lonelyvoidView extends WatchUi.WatchFace {
 
     function onEnterSleep() as Void {
     }
-
 }
