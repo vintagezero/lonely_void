@@ -6,13 +6,17 @@ import Toybox.WatchUi;
 
 class lonelyvoidView extends WatchUi.WatchFace {
     private var _bodyBatteryId as Toybox.Complications.Id or Null;
-    private var _bodyBatteryStr as String = "[BB: ---]";
+    private var _bodyBatteryStr as String = "[ BB: -- ]";
+    private var _weatherId as Toybox.Complications.Id or Null;
+    private var _weatherStr as String = "[ -- ]";
 
     function initialize() {
         Complications.registerComplicationChangeCallback(method(:onComplicationChanged));
         
         _bodyBatteryId = new Complications.Id(Complications.COMPLICATION_TYPE_BODY_BATTERY);
         Complications.subscribeToUpdates(_bodyBatteryId);
+        _weatherId = new Complications.Id(Complications.COMPLICATION_TYPE_CURRENT_TEMPERATURE);
+        Complications.subscribeToUpdates(_weatherId);
 
         WatchFace.initialize();
     }
@@ -29,6 +33,13 @@ class lonelyvoidView extends WatchUi.WatchFace {
             var complication = Complications.getComplication(id);
             if (complication != null && complication.value != null) {
                 _bodyBatteryStr = Lang.format("[ BB: $1$ ]", [complication.value]);
+            }
+        }
+
+        if (_weatherId != null && id.equals(_weatherId)) {
+            var complication = Complications.getComplication(id);
+            if (complication != null && complication.value != null) {
+                _weatherStr = Lang.format("[ $1$° ]", [complication.value.format("%d")]);
             }
         }
 
@@ -81,6 +92,8 @@ class lonelyvoidView extends WatchUi.WatchFace {
         (View.findDrawableById("BATTERY") as WatchUi.Text).setText(batteryString);
         (View.findDrawableById("DISTANCE") as WatchUi.Text).setText(distString);
         (View.findDrawableById("BODY_BATTERY") as WatchUi.Text or Null).setText(_bodyBatteryStr);
+        (View.findDrawableById("WEATHER_TEMP") as WatchUi.Text or Null).setText(_weatherStr);
+
         View.onUpdate(dc);
     }
 
