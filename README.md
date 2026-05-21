@@ -1,1 +1,1 @@
-A simple watchface for Garmin Instinct 2/3 series with MIP displays. 
+A simple watchface for Garmin Instinct 2/3 series with MIP displays.
