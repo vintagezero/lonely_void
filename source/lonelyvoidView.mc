@@ -33,8 +33,8 @@ class lonelyvoidView extends WatchUi.WatchFace {
 
         var actInfo = ActivityMonitor.getInfo();
         var distance = 0.0;
-        var bodyBattery = 0;
-        var sleepScore = 0;
+        var bodyBattery = "---";
+        var sleepScore = "---";
 
         var timeString = Lang.format("$1$:$2$", [
             hours.format("%02d"),

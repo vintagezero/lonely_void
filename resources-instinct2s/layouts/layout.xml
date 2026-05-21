@@ -1,14 +1,14 @@
 <layout id="WatchFace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <drawable class="Background" />
     
-    <label id="VOID" x="left" y="29"  font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
-    <label id="TIME" x="left" y="47" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
-    <label id="DATE" x="left" y="65" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
-    <label id="BATTERY" x="left" y="83" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
-    <label id="DISTANCE" x="left" y="103" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+    <label id="VOID" x="2" y="29"  font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+    <label id="TIME" x="2" y="47" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+    <label id="DATE" x="2" y="65" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+    <label id="BATTERY" x="2" y="83" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+    <label id="DISTANCE" x="2" y="103" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
 
-    <label id="BODY_BATTERY" x="155" y="83" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_WHITE" />
-    <label id="SLEEP_SCORE" x="155" y="103" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_WHITE" />
+    <label id="BODY_BATTERY" x="154" y="83" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_WHITE" />
+    <label id="SLEEP_SCORE" x="154" y="103" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_WHITE" />
 
     <label id="WINDOW" x="128" y="16" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
 </layout>
