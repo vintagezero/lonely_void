@@ -82,8 +82,6 @@ class lonelyvoidView extends WatchUi.WatchFace {
         (View.findDrawableById("DISTANCE") as WatchUi.Text).setText(distString);
         (View.findDrawableById("BODY_BATTERY") as WatchUi.Text).setText(bbString);
         (View.findDrawableById("SLEEP_SCORE") as WatchUi.Text).setText(sleepString);
-
-        (View.findDrawableById("WINDOW") as WatchUi.Text).setText("void");
         
         View.onUpdate(dc);
     }
