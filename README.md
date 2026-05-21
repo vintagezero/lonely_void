@@ -4,7 +4,7 @@
 
 # Lonely void 🌃
 
-A simple watchface for Garmin Instinct 2/3 series with MIP displays.
+A simple watchface for Garmin Instinct 3 Solar watches.
 
 ## Features
 
@@ -15,12 +15,9 @@ A simple watchface for Garmin Instinct 2/3 series with MIP displays.
 ## Supported watches
 
 - Garmin Instinct 3 Solar 45mm/50mm
-- Garmin Instinct 2 Solar / Dual Power/ dezl Edition
-- Garmin Instinct 2S Solar / Dual Power
-- Garmin Instinct 2X Solar
 
 > [!NOTE]
-> If you encounter misalignments or other bugs on either of those models, please reach out so I cat fix it. Also, please feel free to request additional features as I am planning to maintain this watchface.
+> If you encounter misalignments or other bugs on those models, please reach out so I cat fix it. Also, please feel free to request additional features as I am planning to maintain this watchface. If you know how to add support for Instinct 2 series, any help is appreciated.
 
 ## Local build instructions
 
