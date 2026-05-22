@@ -7,16 +7,18 @@ import Toybox.WatchUi;
 class lonelyvoidView extends WatchUi.WatchFace {
     private var _bodyBatteryId as Toybox.Complications.Id or Null;
     private var _bodyBatteryStr as String = "[ BB: -- ]";
-    private var _weatherId as Toybox.Complications.Id or Null;
-    private var _weatherStr as String = "[ -- ]";
+
+    private var _tempId as Toybox.Complications.Id or Null;
+    private var _rawTemp as Number or Null = null;
 
     function initialize() {
         Complications.registerComplicationChangeCallback(method(:onComplicationChanged));
         
         _bodyBatteryId = new Complications.Id(Complications.COMPLICATION_TYPE_BODY_BATTERY);
-        Complications.subscribeToUpdates(_bodyBatteryId);
-        _weatherId = new Complications.Id(Complications.COMPLICATION_TYPE_CURRENT_TEMPERATURE);
-        Complications.subscribeToUpdates(_weatherId);
+        if (_bodyBatteryId != null) { Complications.subscribeToUpdates(_bodyBatteryId); }
+
+        _tempId = new Complications.Id(Complications.COMPLICATION_TYPE_CURRENT_TEMPERATURE);
+        if (_tempId != null) { Complications.subscribeToUpdates(_tempId); }
 
         WatchFace.initialize();
     }
@@ -36,10 +38,10 @@ class lonelyvoidView extends WatchUi.WatchFace {
             }
         }
 
-        if (_weatherId != null && id.equals(_weatherId)) {
+        if (_tempId != null && id.equals(_tempId)) {
             var complication = Complications.getComplication(id);
             if (complication != null && complication.value != null) {
-                _weatherStr = Lang.format("[ $1$° ]", [complication.value.format("%d")]);
+                _rawTemp = complication.value as Number;
             }
         }
 
@@ -86,13 +88,20 @@ class lonelyvoidView extends WatchUi.WatchFace {
             distance.format("%.2f")
         ]);
 
-        (View.findDrawableById("VOID") as WatchUi.Text).setText("$ v o i d");
+        (View.findDrawableById("VOID") as WatchUi.Text).setText("$ v o i d _");
         (View.findDrawableById("TIME") as WatchUi.Text).setText(timeString);
         (View.findDrawableById("DATE") as WatchUi.Text).setText(dateString);
         (View.findDrawableById("BATTERY") as WatchUi.Text).setText(batteryString);
         (View.findDrawableById("DISTANCE") as WatchUi.Text).setText(distString);
         (View.findDrawableById("BODY_BATTERY") as WatchUi.Text or Null).setText(_bodyBatteryStr);
-        (View.findDrawableById("WEATHER_TEMP") as WatchUi.Text or Null).setText(_weatherStr);
+
+        var tempLabel = View.findDrawableById("WEATHER") as WatchUi.Text or Null;
+
+        if (tempLabel != null) {
+            var tempValue = (_rawTemp != null) ? _rawTemp.format("%d") + "°" : "--°";
+            var tempStr = Lang.format("[ $1$ ]", [tempValue]);
+            tempLabel.setText(tempStr);
+        }
 
         View.onUpdate(dc);
     }
