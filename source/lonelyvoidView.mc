@@ -11,7 +11,12 @@ class lonelyvoidView extends WatchUi.WatchFace {
     private var _tempId as Toybox.Complications.Id or Null;
     private var _rawTemp as Number or Null = null;
 
+    private var _solarId as Toybox.Complications.Id or Null;
+    private var _solarNum as Number or Null = null;
+
     function initialize() {
+        WatchFace.initialize();
+
         Complications.registerComplicationChangeCallback(method(:onComplicationChanged));
         
         _bodyBatteryId = new Complications.Id(Complications.COMPLICATION_TYPE_BODY_BATTERY);
@@ -20,7 +25,8 @@ class lonelyvoidView extends WatchUi.WatchFace {
         _tempId = new Complications.Id(Complications.COMPLICATION_TYPE_CURRENT_TEMPERATURE);
         if (_tempId != null) { Complications.subscribeToUpdates(_tempId); }
 
-        WatchFace.initialize();
+        _solarId = new Complications.Id(Complications.COMPLICATION_TYPE_SOLAR_INPUT);
+        if (_solarId != null) { Complications.subscribeToUpdates(_solarId); }
     }
 
     function onLayout(dc as Dc) as Void {
@@ -42,6 +48,13 @@ class lonelyvoidView extends WatchUi.WatchFace {
             var complication = Complications.getComplication(id);
             if (complication != null && complication.value != null) {
                 _rawTemp = complication.value as Number;
+            }
+        }
+
+        if (_solarId != null && id.equals(_solarId)) {
+            var complication = Complications.getComplication(id);
+            if (complication != null && complication.value != null) {
+                _solarNum = complication.value as Number;
             }
         }
 
@@ -76,10 +89,14 @@ class lonelyvoidView extends WatchUi.WatchFace {
             dayStr
         ]);
 
-        var batteryString = Lang.format("[ $1$% ]", [
-            battery
-        ]);
+        var batteryString;
 
+        if (_solarNum != null && _solarNum > 85) {
+            batteryString = Lang.format("[ $1$% SOL ]", [battery]);
+        } else {
+            batteryString = Lang.format("[ $1$% ]", [battery]);
+        }
+        
         if (actInfo.distance != null) {
             distance = actInfo.distance / 100000.0;
         }
@@ -94,7 +111,7 @@ class lonelyvoidView extends WatchUi.WatchFace {
         (View.findDrawableById("BATTERY") as WatchUi.Text).setText(batteryString);
         (View.findDrawableById("DISTANCE") as WatchUi.Text).setText(distString);
         (View.findDrawableById("BODY_BATTERY") as WatchUi.Text or Null).setText(_bodyBatteryStr);
-
+ 
         var tempLabel = View.findDrawableById("WEATHER") as WatchUi.Text or Null;
 
         if (tempLabel != null) {
