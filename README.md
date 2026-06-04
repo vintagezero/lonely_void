@@ -12,6 +12,17 @@ A simple watchface for Garmin Instinct 3 Solar watches.
 2. Displays essential data
 3. Instinct circular subframe support
 
+## Data fields
+
+![BetaScreen0](images/beta.png)
+
+- Current time in 24-hour format
+- Current date - month, day, day of the week
+- Battery percent
+- Distance covered today (in km)
+- Current temperature
+- Current Body battery level
+
 ## Supported watches
 
 - Garmin Instinct 3 Solar 45mm/50mm
@@ -27,8 +38,3 @@ A simple watchface for Garmin Instinct 3 Solar watches.
 4. Open the repository folder in VS Code
 5. Press `Ctrl+Shift+P` and find command `Monkey C: Verify installation`
 6. Press `F5` to start the simulation and select the device
-
-## Tech stack
-
-- Monkey C
-- Connect IQ SDK
